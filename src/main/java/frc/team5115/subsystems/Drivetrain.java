@@ -6,7 +6,7 @@ import frc.team5115.robot.Robot;
 
 import static frc.team5115.robot.Robot.joy;
 
-public class drivetrain {
+public class Drivetrain {
 
     TalonSRX frontLeft;
     TalonSRX frontRight;
@@ -15,7 +15,7 @@ public class drivetrain {
 
     private double throttle = .5;
 
-    public drivetrain() {
+    public Drivetrain() {
         frontLeft = new TalonSRX(1);
         frontRight = new TalonSRX(2);
         backLeft = new TalonSRX(3);

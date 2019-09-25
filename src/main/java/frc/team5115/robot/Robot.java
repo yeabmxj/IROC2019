@@ -7,11 +7,11 @@ import frc.team5115.subsystems.*;
 
 public class Robot extends TimedRobot {
     public static Joystick joy;
-    public static drivetrain dt;
+    public static Drivetrain dt;
 
     public void robotInit() {
         joy = new Joystick(0);
-        dt = new drivetrain();
+        dt = new Drivetrain();
     }
 
     public void robotPeriodic() {
