@@ -6,16 +6,17 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import frc.team5115.subsystems.*;
 
 public class Robot extends TimedRobot {
+    public static  Drivetrain dt;
     public static Joystick joy;
-    public static Drivetrain dt;
+
 
     public void robotInit() {
-        joy = new Joystick(0);
         dt = new Drivetrain();
+        joy = new Joystick(0);
     }
 
     public void robotPeriodic() {
-        dt.drive(joy.getRawAxis(4), joy.getRawAxis(1), dt.throttle());
+        dt.h(joy.getRawAxis(4),joy.getRawAxis(1), .5);
     }
 }
 
