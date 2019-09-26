@@ -6,9 +6,9 @@ import static frc.team5115.base.Constants.*;
 public class Head {
     private VictorWrapper head;
 
-    public Head() {
-        head = new VictorWrapper(HEAD_ID);
+    public Head(int id) {
+        head = new VictorWrapper(id);
     }
 
-
+    public void actuate(int direction) { head.set(direction * HEAD_SPEED); }
 }

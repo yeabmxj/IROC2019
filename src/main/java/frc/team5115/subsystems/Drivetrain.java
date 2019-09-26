@@ -13,13 +13,11 @@ public class Drivetrain {
     TalonSRX backLeft;
     TalonSRX backRight;
 
-    private double throttle = .5;
-
-    public Drivetrain() {
-        frontLeft = new TalonSRX(1);
-        frontRight = new TalonSRX(2);
-        backLeft = new TalonSRX(3);
-        backRight = new TalonSRX(4);
+    public Drivetrain(int frontLeftID, int frontRightID, int backLeftID, int backRightID) {
+        frontLeft = new TalonSRX(frontLeftID);
+        frontRight = new TalonSRX(frontRightID);
+        backLeft = new TalonSRX(backLeftID);
+        backRight = new TalonSRX(backRightID);
 
         frontLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
         frontRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
@@ -39,7 +37,7 @@ public class Drivetrain {
 
     }
 
-    public double throttle() {
+    public double throttle(double throttle) {
         throttle += 0.03 *(joy.getRawAxis(3) - joy.getRawAxis(2));
 
         if (throttle > 1){
