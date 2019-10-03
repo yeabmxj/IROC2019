@@ -2,7 +2,8 @@ package frc.team5115.base;
 
 public class Constants {
     //ROBOT ATTRIBUTES
-    public static final int FLIP_DIRECTION = -1;
+    public static final int HEAD_DIRECTION = -1;
+    public static final int ARM_DIRECTION = -1;
 
     //ARM
     public static final int ARM_ID = 0;

@@ -13,7 +13,7 @@ public class ArmSystem extends StateMachine {
         arm.setInverted(true);
     }
 
-    public void move(int direction, double speed) { arm.set(direction * speed); }
+    private void move(int direction, double speed) { arm.set(direction * speed); }
 
     public void update() {
         switch(asm.getState()) {
@@ -21,10 +21,10 @@ public class ArmSystem extends StateMachine {
                 move(0,0);
                 break;
             case FORWARD:
-                move(FLIP_DIRECTION, ARM_SPEED);
+                move(ARM_DIRECTION, ARM_SPEED);
                 break;
             case REVERSE:
-                move(1, ARM_SPEED);
+                move(-ARM_DIRECTION, ARM_SPEED);
                 break;
         }
     }

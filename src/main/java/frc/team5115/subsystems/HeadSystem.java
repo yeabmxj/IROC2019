@@ -12,7 +12,7 @@ public class HeadSystem {
         head = new VictorWrapper(id);
     }
 
-    public void actuate(int direction, double speed) { head.set(direction * speed); }
+    private void actuate(int direction, double speed) { head.set(direction * speed); }
 
     public void update() {
         switch(hsm.getState()) {
@@ -20,10 +20,10 @@ public class HeadSystem {
                 actuate(0,0);
                 break;
             case FORWARD:
-                actuate(FLIP_DIRECTION, HEAD_SPEED);
+                actuate(HEAD_DIRECTION, HEAD_SPEED);
                 break;
             case REVERSE:
-                actuate(1, HEAD_SPEED);
+                actuate(-HEAD_DIRECTION, HEAD_SPEED);
                 break;
         }
     }

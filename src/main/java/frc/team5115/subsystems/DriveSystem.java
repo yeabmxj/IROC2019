@@ -1,25 +1,25 @@
 package frc.team5115.subsystems;
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import frc.team5115.external.TalonWrapper;
+
 import static frc.team5115.base.Constants.*;
 import static frc.team5115.base.StateMachine.*;
 import static frc.team5115.robot.Robot.*;
 
 public class DriveSystem {
 
-    private TalonSRX frontLeft;
-    private TalonSRX frontRight;
-    private TalonSRX backLeft;
-    private TalonSRX backRight;
+    private TalonWrapper frontLeft;
+    private TalonWrapper frontRight;
+    private TalonWrapper backLeft;
+    private TalonWrapper backRight;
 
     private double throttle = INITIAL_THROTTLE;
 
     public DriveSystem(int frontLeftID, int frontRightID, int backLeftID, int backRightID) {
-        frontLeft = new TalonSRX(frontLeftID);
-        frontRight = new TalonSRX(frontRightID);
-        backLeft = new TalonSRX(backLeftID);
-        backRight = new TalonSRX(backRightID);
+        frontLeft = new TalonWrapper(frontLeftID);
+        frontRight = new TalonWrapper(frontRightID);
+        backLeft = new TalonWrapper(backLeftID);
+        backRight = new TalonWrapper(backRightID);
 
         frontLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
         frontRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
@@ -27,19 +27,19 @@ public class DriveSystem {
         backRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
     }
 
-    public void drive(double x, double y, double thrott) {
+    private void drive(double x, double y, double thrott) {
         x *= -1;
         double leftSpd = (y + x) * thrott;
         double rightSpd= (y - x) * thrott;
 
-        frontLeft.set(ControlMode.PercentOutput, -leftSpd);
-        backLeft.set(ControlMode.PercentOutput, -leftSpd);
-        frontRight.set(ControlMode.PercentOutput, rightSpd);
-        backRight.set(ControlMode.PercentOutput, rightSpd);
+        frontLeft.set(-leftSpd);
+        backLeft.set(-leftSpd);
+        frontRight.set(rightSpd);
+        backRight.set(rightSpd);
 
     }
 
-    public double throttle(double increase, double decrease) {
+    private double throttle(double increase, double decrease) {
         throttle += 0.03 *(increase - decrease);
 
         if (throttle > 1){
@@ -51,10 +51,10 @@ public class DriveSystem {
     }
 
     public void resetEncoders() {
-        frontLeft.set(ControlMode.PercentOutput, 0);
-        backLeft.set(ControlMode.PercentOutput, 0);
-        frontRight.set(ControlMode.PercentOutput, 0);
-        backRight.set(ControlMode.PercentOutput, 0);
+        frontLeft.set(0);
+        backLeft.set(0);
+        frontRight.set(0);
+        backRight.set(0);
     }
 
     public void update() {
@@ -68,5 +68,3 @@ public class DriveSystem {
         }
     }
 }
-
-//Do jacks stuff afterwards

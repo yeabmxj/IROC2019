@@ -1,16 +1,22 @@
 package frc.team5115.external;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 public class TalonWrapper {
-    private VictorSPX victorSPX;
+    private TalonSRX talonSRX;
     private DigitalInput upper;
     private DigitalInput lower;
 
-    public TalonWrapper(int victorID, int upperID, int lowerID) {
-        victorSPX = new VictorSPX(victorID);
+    public TalonWrapper(int talonID) {
+        talonSRX = new TalonSRX(talonID);
+    }
+
+    public TalonWrapper(int talonID, int upperID, int lowerID) {
+        talonSRX = new TalonSRX(talonID);
         upper = new DigitalInput(upperID);
         lower = new DigitalInput(lowerID);
     }
@@ -19,7 +25,15 @@ public class TalonWrapper {
         return upper.get() && lower.get();
     }
 
+    public void set(double value, boolean hit) {
+        talonSRX.set(ControlMode.PercentOutput, hit ? value : 0);
+    }
+
     public void set(double value) {
-        victorSPX.set(ControlMode.PercentOutput, getHit() ? value : 0);
+        talonSRX.set(ControlMode.PercentOutput, value);
+    }
+
+    public void configSelectedFeedbackSensor(FeedbackDevice e) {
+        talonSRX.configSelectedFeedbackSensor(e);
     }
 }

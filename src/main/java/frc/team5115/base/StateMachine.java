@@ -2,7 +2,7 @@ package frc.team5115.base;
 
 public class StateMachine {
 
-    public int state = 0;
+    private int state = 0;
 
     public static final int OFF = 0;
     public static final int ON = 1;
@@ -12,6 +12,6 @@ public class StateMachine {
     public void init() {}
     public void update() {}
 
-    public void setState(int s) { state = s;}
+    protected void setState(int s) { state = s;}
     public int getState() { return state; }
 }

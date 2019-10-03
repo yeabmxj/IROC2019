@@ -6,6 +6,7 @@ import static frc.team5115.robot.Robot.*;
 public class DriveStateMachine extends StateMachine {
     public void init() {
         setState(OFF);
+        ds.resetEncoders();
         ds.update();
     }
 
