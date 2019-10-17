@@ -12,7 +12,6 @@ public class NavxWrapper {
         ROLL, PITCH, YAW
     }
 
-    int count = 0;
     private double raw = 0;
     private double sum = 0;
 

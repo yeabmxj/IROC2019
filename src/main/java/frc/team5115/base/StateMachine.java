@@ -8,6 +8,8 @@ public class StateMachine {
     public static final int ON = 1;
     public static final int FORWARD = 2;
     public static final int REVERSE = 3;
+    public static final int LEVEL_UP = 4;
+    public static final int LEVEL_DOWN = 5;
 
     public void init() {}
     public void update() {}

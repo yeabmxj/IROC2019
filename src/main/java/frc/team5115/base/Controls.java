@@ -19,6 +19,8 @@ public class Controls {
 
     public boolean armUP() { return joy.getRawButton(ARM_UP); }
     public boolean armDown() { return joy.getRawButton(ARM_DOWN); }
+    public boolean levelUp() { return joy.getRawButton(LEVEL_UP); }
+    public boolean levelDown() { return joy.getRawButton(LEVEL_DOWN); }
 
     public boolean headOuttake() { return joy.getRawButton(HEAD_OUTTAKE); }
     public boolean headIntake() { return joy.getRawButton(HEAD_INTAKE); }

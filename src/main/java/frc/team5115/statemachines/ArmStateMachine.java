@@ -10,7 +10,7 @@ public class ArmStateMachine extends StateMachine {
     }
 
     public void update() {
-        setState(joy.armUP() ? FORWARD : joy.armDown() ? REVERSE : OFF);
+        setState(joy.armUP() ? FORWARD : joy.armDown() ? REVERSE : joy.levelUp() ? LEVEL_UP : joy.levelDown() ? LEVEL_DOWN :  OFF);
         as.update();
     }
 }

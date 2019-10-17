@@ -15,6 +15,9 @@ public class Constants {
 
     public static final double ARM_SPEED = 0;
 
+    public static final double ARM_TOLERANCE = 1;
+    public static final double[] LEVEL = {10,20,30,40};
+
     //HEAD
     public static final int HEAD_ID = 0;
 
@@ -38,6 +41,8 @@ public class Constants {
 
     public static final int ARM_UP = 0;
     public static final int ARM_DOWN = 0;
+    public static final int LEVEL_UP = 0;
+    public static final int LEVEL_DOWN = 0;
     public static final int HEAD_OUTTAKE = 0;
     public static final int HEAD_INTAKE = 0;
 }
