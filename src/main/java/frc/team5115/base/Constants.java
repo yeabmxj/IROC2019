@@ -5,6 +5,9 @@ public class Constants {
     public static final int HEAD_DIRECTION = -1;
     public static final int ARM_DIRECTION = -1;
 
+    //NAVX
+    public static final int SAMPLE_SIZE = 1000;
+
     //ARM
     public static final int ARM_ID = 0;
     public static final int ARM_UPPER_ID = 0;

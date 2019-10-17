@@ -3,6 +3,7 @@ package frc.team5115.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 
 import frc.team5115.base.Controls;
+import frc.team5115.external.NavxWrapper;
 import frc.team5115.statemachines.ArmStateMachine;
 import frc.team5115.statemachines.DriveStateMachine;
 import frc.team5115.statemachines.HeadStateMachine;
@@ -21,6 +22,8 @@ public class Robot extends TimedRobot {
     public static DriveStateMachine dsm;
     public static HeadStateMachine hsm;
 
+    public static NavxWrapper navx;
+
     public void robotInit() {
         joy = new Controls(JOY_PORT);
 
@@ -38,6 +41,8 @@ public class Robot extends TimedRobot {
     }
 
     public void robotPeriodic() {
+        navx.update(NavxWrapper.AXIS.ROLL);
+
         asm.update();
         dsm.update();
         hsm.update();
