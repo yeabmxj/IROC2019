@@ -25,9 +25,7 @@ public class NavxWrapper {
 
     public NavxWrapper() {
         while(gyro == null || !gyro.isConnected()) {
-            for(SerialPort.Port port : ports) {
-                gyro = new AHRS(port);
-            }
+            for(SerialPort.Port port : ports) gyro = new AHRS(port);
         }
     }
 
@@ -51,9 +49,7 @@ public class NavxWrapper {
     }
 
     public void update(AXIS axis) {
-        for (int i = 0; i < slider.length-1; i++) {
-            sum += slider[i];
-        }
+        for (int i = 0; i < slider.length-1; i++) sum += slider[i];
         if (slider.length - 1 >= 0) System.arraycopy(slider, 0, slider, 1, slider.length - 1);
         slider[0] = getRawValue(axis);
     }

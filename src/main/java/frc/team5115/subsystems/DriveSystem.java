@@ -15,6 +15,8 @@ public class DriveSystem {
 
     private double throttle = INITIAL_THROTTLE;
 
+    private double QUICK_STOP_ACCUMULATOR;
+
     public DriveSystem(int frontLeftID, int frontRightID, int backLeftID, int backRightID) {
         frontLeft = new TalonWrapper(frontLeftID);
         frontRight = new TalonWrapper(frontRightID);
@@ -27,16 +29,69 @@ public class DriveSystem {
         backRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
     }
 
-    private void drive(double x, double y, double thrott) {
-        x *= -1;
-        double leftSpd = (y + x) * thrott;
-        double rightSpd= (y - x) * thrott;
+    private void tankDrive(double x, double y, double throttle) {
+        double rightSpd = Math.copySign((y + x) * (y + x), (y+x));
+        double leftSpd = Math.copySign((y - x) * (y-x), (y-x));
 
-        frontLeft.set(-leftSpd);
-        backLeft.set(-leftSpd);
-        frontRight.set(rightSpd);
-        backRight.set(rightSpd);
+        frontLeft.set(-leftSpd * throttle);
+        backLeft.set(-leftSpd * throttle);
+        frontRight.set(rightSpd * throttle);
+        backRight.set(rightSpd * throttle);
+    }
 
+    private void cheesyDrive(double x, double z, double throttle, boolean isQuickTurn) {
+        double angularPower;
+        boolean overPower;
+
+        if (isQuickTurn) {
+            if (Math.abs(x) < QUICK_STOP_THRESHOLD) {
+                double m_quickStopAlpha = QUICK_STOP_ALPHA;
+                QUICK_STOP_ACCUMULATOR = (1 - m_quickStopAlpha) * QUICK_STOP_ACCUMULATOR + m_quickStopAlpha * z * 2;
+            }
+            overPower = true;
+            angularPower = z;
+        } else {
+            overPower = false;
+            angularPower = Math.abs(x) * z - QUICK_STOP_ACCUMULATOR;
+
+            if (QUICK_STOP_ACCUMULATOR > 1) {
+                QUICK_STOP_ACCUMULATOR -= 1;
+            } else if (QUICK_STOP_ACCUMULATOR < -1) {
+                QUICK_STOP_ACCUMULATOR += 1;
+            } else {
+                QUICK_STOP_ACCUMULATOR = 0.0;
+            }
+        }
+
+        double leftSpd = x + angularPower;
+        double rightSpd = x - angularPower;
+
+        if (overPower) {
+            if (leftSpd > 1.0) {
+                rightSpd -= leftSpd - 1.0;
+                leftSpd = 1.0;
+            } else if (rightSpd > 1.0) {
+                leftSpd -= rightSpd - 1.0;
+                rightSpd = 1.0;
+            } else if (leftSpd < -1.0) {
+                rightSpd -= leftSpd + 1.0;
+                leftSpd = -1.0;
+            } else if (rightSpd < -1.0) {
+                leftSpd -= rightSpd + 1.0;
+                rightSpd = -1.0;
+            }
+        }
+
+        double maxMagnitude = Math.max(Math.abs(leftSpd), Math.abs(rightSpd));
+        if (maxMagnitude > 1.0) {
+            leftSpd /= maxMagnitude;
+            rightSpd /= maxMagnitude;
+        }
+
+        frontLeft.set(leftSpd * throttle);
+        backLeft.set(leftSpd * throttle);
+        frontRight.set(rightSpd * throttle);
+        backLeft.set(rightSpd * throttle);
     }
 
     private double throttle(double increase, double decrease) {
@@ -60,13 +115,11 @@ public class DriveSystem {
     public void update() {
         switch(dsm.getState()) {
             case OFF:
-                drive(0,0,0);
+                tankDrive(0,0,0);
                 break;
             case ON:
-                drive(joy.getX(),joy.getY(),throttle(joy.increaseThrottle(),joy.decreaseThrottle()));
+                tankDrive(joy.getX(),joy.getY(),throttle(joy.increaseThrottle(),joy.decreaseThrottle()));
                 break;
         }
     }
 }
-
-// take a look at cheesy drive implementation

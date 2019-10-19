@@ -58,7 +58,7 @@ public class ArmSystem extends StateMachine {
                 if (getCurrentLevel() - 1 < 0) { move(0,0); }
                 else {
                     do {
-                        move(ARM_DIRECTION, armPID.PID(LEVEL[getCurrentLevel() - 1], navx.getValue(), ARM_TOLERANCE));
+                        move(-ARM_DIRECTION, armPID.PID(LEVEL[getCurrentLevel() - 1], navx.getValue(), ARM_TOLERANCE));
                     } while (!armPID.isFinished());
                 }
                 break;

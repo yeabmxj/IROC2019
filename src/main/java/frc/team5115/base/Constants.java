@@ -15,6 +15,9 @@ public class Constants {
 
     public static final double ARM_SPEED = 0;
 
+    public static final double QUICK_STOP_THRESHOLD = 0.2;
+    public static final double QUICK_STOP_ALPHA = 0.1;
+
     public static final double ARM_TOLERANCE = 1;
     public static final double[] LEVEL = {10,20,30,40};
 
