@@ -17,7 +17,7 @@ public class ArmSystem extends StateMachine {
         arm = new VictorWrapper(armID,upperID,lowerID);
         arm.setInverted(true);
 
-        armPID = new PID();
+        armPID = new PID(1, 0, 0);
     }
 
     private void move(int direction, double speed) { arm.set(direction * speed); } // 0 1 2 3
