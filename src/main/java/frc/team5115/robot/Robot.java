@@ -22,7 +22,8 @@ public class Robot extends TimedRobot {
     public static DriveStateMachine dsm;
     public static HeadStateMachine hsm;
 
-    public static NavxWrapper navx;
+    public static NavxWrapper armGyro;
+    public static NavxWrapper driveGyro;
 
     public void robotInit() {
         joy = new Controls(JOY_PORT);
@@ -35,13 +36,17 @@ public class Robot extends TimedRobot {
         dsm = new DriveStateMachine();
         hsm = new HeadStateMachine();
 
+        armGyro.init(NavxWrapper.AXIS.X);
+        driveGyro.init(NavxWrapper.AXIS.X);
+
         asm.init();
         dsm.init();
         hsm.init();
     }
 
     public void robotPeriodic() {
-        navx.update(NavxWrapper.AXIS.ROLL);
+        armGyro.update(NavxWrapper.AXIS.X);
+        driveGyro.update(NavxWrapper.AXIS.X);
 
         asm.update();
         dsm.update();

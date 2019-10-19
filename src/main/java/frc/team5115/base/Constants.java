@@ -34,11 +34,17 @@ public class Constants {
 
     public static final double INITIAL_THROTTLE = 0;
 
+    public static final int X_ACCELERATION_DIRECTION = 1;
+    public static final double X_SAFE_ACCELERATION = 10;
+
+    public static final double SAFE_ANGLE = 10;
+
     //JOYSTICK
     public static final int JOY_PORT = 0;
 
     public static final int X_AXIS = 4;
     public static final int Y_AXIS = 1;
+    public static final int Z_AXIS = 3;
     public static final int INCREASE_THROTTLE = 3;
     public static final int DECREASE_THROTTLE = 2;
 

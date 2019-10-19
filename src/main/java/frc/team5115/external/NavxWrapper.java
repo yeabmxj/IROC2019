@@ -8,8 +8,9 @@ import static frc.team5115.base.Constants.*;
 public class NavxWrapper {
     private AHRS gyro;
 
+    //X: Pitch  Y: Yaw  Z: Roll
     public enum AXIS {
-        ROLL, PITCH, YAW
+        X, Y, Z
     }
 
     private double raw = 0;
@@ -29,28 +30,49 @@ public class NavxWrapper {
         }
     }
 
-    public double getRawValue(AXIS axis) {
+    private double getRawValue(AXIS axis) {
         switch(axis) {
-            case ROLL:
-                raw = gyro.getRoll();
-                break;
-            case PITCH:
+            case X:
                 raw = gyro.getPitch();
                 break;
-            case YAW:
+            case Y:
                 raw = gyro.getYaw();
+                break;
+            case Z:
+                raw = gyro.getRoll();
                 break;
         }
         return raw;
     }
 
+    public double getAcceleration(int direction, AXIS axis) {
+        switch(axis) {
+            case X:
+                raw = gyro.getRawAccelX();
+                break;
+            case Y:
+                raw = gyro.getRawAccelY();
+                break;
+            case Z:
+                raw = gyro.getRawAccelZ();
+                break;
+        }
+        return direction * raw;
+    }
+
     public double getValue() {
+        for (int i = 0; i < slider.length-1; i++) sum += slider[i];
         return sum/slider.length;
     }
 
-    public void update(AXIS axis) {
-        for (int i = 0; i < slider.length-1; i++) sum += slider[i];
-        if (slider.length - 1 >= 0) System.arraycopy(slider, 0, slider, 1, slider.length - 1);
+    public void init(AXIS axis) {
         slider[0] = getRawValue(axis);
+    }
+
+    public void update(AXIS axis) {
+        if (slider.length - 1 >= 0) {
+            System.arraycopy(slider, 0, slider, 1, slider.length - 1);
+            slider[0] = getRawValue(axis);
+        }
     }
 }

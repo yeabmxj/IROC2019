@@ -23,7 +23,7 @@ public class ArmSystem extends StateMachine {
     private void move(int direction, double speed) { arm.set(direction * speed); } // 0 1 2 3
 
     private int getCurrentLevel() {
-        double currentHeight = navx.getValue();
+        double currentHeight = armGyro.getValue();
         double difference = Math.abs(LEVEL[0] - currentHeight);
         for(int c = 1; c < LEVEL.length; c++) {
             double currentDifference = Math.abs(LEVEL[c] - currentHeight);
@@ -50,7 +50,7 @@ public class ArmSystem extends StateMachine {
                 if (getCurrentLevel() + 1 > 3) { move(0,0); }
                 else {
                     do {
-                        move(ARM_DIRECTION, armPID.PID(LEVEL[getCurrentLevel() + 1], navx.getValue(), ARM_TOLERANCE));
+                        move(ARM_DIRECTION, armPID.PID(LEVEL[getCurrentLevel() + 1], armGyro.getValue(), ARM_TOLERANCE));
                     } while (!armPID.isFinished());
                 }
                 break;
@@ -58,7 +58,7 @@ public class ArmSystem extends StateMachine {
                 if (getCurrentLevel() - 1 < 0) { move(0,0); }
                 else {
                     do {
-                        move(-ARM_DIRECTION, armPID.PID(LEVEL[getCurrentLevel() - 1], navx.getValue(), ARM_TOLERANCE));
+                        move(-ARM_DIRECTION, armPID.PID(LEVEL[getCurrentLevel() - 1], armGyro.getValue(), ARM_TOLERANCE));
                     } while (!armPID.isFinished());
                 }
                 break;

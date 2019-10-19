@@ -1,5 +1,6 @@
 package frc.team5115.subsystems;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import frc.team5115.external.NavxWrapper;
 import frc.team5115.external.TalonWrapper;
 
 import static frc.team5115.base.Constants.*;
@@ -118,7 +119,13 @@ public class DriveSystem {
                 tankDrive(0,0,0);
                 break;
             case ON:
-                tankDrive(joy.getX(),joy.getY(),throttle(joy.increaseThrottle(),joy.decreaseThrottle()));
+                if (driveGyro.getValue() > SAFE_ANGLE && driveGyro.getAcceleration(X_ACCELERATION_DIRECTION, NavxWrapper.AXIS.X) > X_SAFE_ACCELERATION) dsm.setState(TIPPING);
+                else tankDrive(joy.getX(),joy.getY(),throttle(joy.increaseThrottle(),joy.decreaseThrottle()));
+                break;
+            case TIPPING:
+                double forward = -(driveGyro.getValue() / SAFE_ANGLE);
+                tankDrive(forward,0,throttle(joy.increaseThrottle(),joy.decreaseThrottle()));
+                if (driveGyro.getValue() < SAFE_ANGLE) dsm.setState(ON);
                 break;
         }
     }
