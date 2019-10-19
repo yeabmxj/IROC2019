@@ -119,13 +119,13 @@ public class DriveSystem {
                 tankDrive(0,0,0);
                 break;
             case ON:
-                if (driveGyro.getValue() > SAFE_ANGLE && driveGyro.getAcceleration(X_ACCELERATION_DIRECTION, NavxWrapper.AXIS.X) > X_SAFE_ACCELERATION) dsm.setState(TIPPING);
+                if (driveGyro.getPitch() > SAFE_ANGLE && driveGyro.getAcceleration(X_ACCELERATION_DIRECTION, NavxWrapper.AXIS.X) > X_SAFE_ACCELERATION) dsm.setState(TIPPING);
                 else tankDrive(joy.getX(),joy.getY(),throttle(joy.increaseThrottle(),joy.decreaseThrottle()));
                 break;
             case TIPPING:
-                double forward = -(driveGyro.getValue() / SAFE_ANGLE);
+                double forward = -(driveGyro.getPitch() / SAFE_ANGLE);
                 tankDrive(forward,0,throttle(joy.increaseThrottle(),joy.decreaseThrottle()));
-                if (driveGyro.getValue() < SAFE_ANGLE) dsm.setState(ON);
+                if (driveGyro.getPitch() < SAFE_ANGLE) dsm.setState(ON);
                 break;
         }
     }

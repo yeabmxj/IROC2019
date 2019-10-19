@@ -36,8 +36,8 @@ public class Robot extends TimedRobot {
         dsm = new DriveStateMachine();
         hsm = new HeadStateMachine();
 
-        armGyro.init(NavxWrapper.AXIS.X);
-        driveGyro.init(NavxWrapper.AXIS.X);
+        armGyro.init();
+        driveGyro.init();
 
         asm.init();
         dsm.init();
@@ -45,8 +45,8 @@ public class Robot extends TimedRobot {
     }
 
     public void robotPeriodic() {
-        armGyro.update(NavxWrapper.AXIS.X);
-        driveGyro.update(NavxWrapper.AXIS.X);
+        armGyro.update();
+        driveGyro.update();
 
         asm.update();
         dsm.update();

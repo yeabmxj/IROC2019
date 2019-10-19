@@ -14,9 +14,14 @@ public class NavxWrapper {
     }
 
     private double raw = 0;
-    private double sum = 0;
 
-    private double[] slider = new double[SAMPLE_SIZE];
+    private double sumX = 0;
+    private double sumY = 0;
+    private double sumZ = 0;
+
+    private double[] sliderX = new double[SAMPLE_SIZE];
+    private double[] sliderY = new double[SAMPLE_SIZE];
+    private double[] sliderZ = new double[SAMPLE_SIZE];
 
     private SerialPort.Port[] ports = {
         SerialPort.Port.kUSB,
@@ -60,19 +65,34 @@ public class NavxWrapper {
         return direction * raw;
     }
 
-    public double getValue() {
-        for (int i = 0; i < slider.length-1; i++) sum += slider[i];
-        return sum/slider.length;
+    public double getPitch() {
+        for (int i = 0; i < sliderX.length-1; i++) sumX += sliderX[i];
+        return sumX / sliderX.length;
     }
 
-    public void init(AXIS axis) {
-        slider[0] = getRawValue(axis);
+    public double getYaw() {
+        for (int i = 0; i < sliderY.length-1; i++) sumY += sliderY[i];
+        return sumY / sliderY.length;
     }
 
-    public void update(AXIS axis) {
-        if (slider.length - 1 >= 0) {
-            System.arraycopy(slider, 0, slider, 1, slider.length - 1);
-            slider[0] = getRawValue(axis);
-        }
+    public double getRoll() {
+        for (int i = 0; i < sliderZ.length-1; i++) sumZ += sliderZ[i];
+        return sumZ / sliderZ.length;
+    }
+
+    public void init() {
+        sliderX[0] = gyro.getPitch();
+        sliderY[0] = gyro.getYaw();
+        sliderZ[0] = gyro.getRoll();
+    }
+
+    public void update() {
+        System.arraycopy(sliderX, 0, sliderX, 1, sliderX.length - 1);
+        System.arraycopy(sliderY, 0, sliderY, 1, sliderY.length - 1);
+        System.arraycopy(sliderZ, 0, sliderZ, 1, sliderZ.length - 1);
+
+        sliderX[0] = getRawValue(AXIS.X);
+        sliderY[0] = getRawValue(AXIS.Y);
+        sliderZ[0] = getRawValue(AXIS.Z);
     }
 }
