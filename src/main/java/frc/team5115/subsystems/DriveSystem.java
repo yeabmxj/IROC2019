@@ -1,9 +1,9 @@
 package frc.team5115.subsystems;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import static frc.team5115.base.Constants.*;
 import frc.team5115.external.NavxWrapper;
 import frc.team5115.external.TalonWrapper;
 
-import static frc.team5115.base.Constants.*;
 import static frc.team5115.base.StateMachine.*;
 import static frc.team5115.robot.Robot.*;
 
@@ -30,7 +30,7 @@ public class DriveSystem {
         backRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
     }
 
-    private void tankDrive(double x, double y, double throttle) {
+    public void tankDrive(double x, double y, double throttle) {
         double rightSpd = Math.copySign((y + x) * (y + x), (y+x));
         double leftSpd = Math.copySign((y - x) * (y-x), (y-x));
 
@@ -124,8 +124,13 @@ public class DriveSystem {
                 break;
             case TIPPING:
                 double forward = -(driveGyro.getPitch() / SAFE_ANGLE);
-                tankDrive(forward,0,throttle(joy.increaseThrottle(),joy.decreaseThrottle()));
+                tankDrive(0,forward,throttle(joy.increaseThrottle(),joy.decreaseThrottle()));
                 if (driveGyro.getPitch() < SAFE_ANGLE) dsm.setState(ON);
+                break;
+            case AUTO_DRIVE:
+                do {
+                    simpleAuto.drive(AUTO_SPEED);
+                } while (!simpleAuto.isFinished() && limelight.getDistance() > STOP_DISTANCE && joy.autoCorrect());
                 break;
         }
     }

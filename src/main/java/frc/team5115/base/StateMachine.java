@@ -11,6 +11,7 @@ public class StateMachine {
     public static final int LEVEL_UP = 4;
     public static final int LEVEL_DOWN = 5;
     public static final int TIPPING = 6;
+    public static final int AUTO_DRIVE = 7;
 
     public void init() {}
     public void update() {}

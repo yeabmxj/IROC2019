@@ -11,7 +11,7 @@ public class DriveStateMachine extends StateMachine {
     }
 
     public void update() {
-        setState(ON);
+        setState(joy.autoCorrect() ? AUTO_DRIVE : ON);
         ds.update();
     }
 }

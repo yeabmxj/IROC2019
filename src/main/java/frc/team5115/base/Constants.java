@@ -5,8 +5,20 @@ public class Constants {
     public static final int HEAD_DIRECTION = -1;
     public static final int ARM_DIRECTION = -1;
 
+    //AUTO
+    public static final double AUTO_THROTTLE = 1;
+    public static final double AUTO_TOLERANCE = 10;
+    public static final double AUTO_SPEED = .5;
+
     //NAVX
-    public static final int SAMPLE_SIZE = 1000;
+    public static final int SAMPLE_SIZE = 100;
+
+    //LIMELIGHT
+    public static final double CAMERA_HEIGHT = 10;
+    public static final double TAPE_HEIGHT = 30;
+    public static final double CAMERA_ANGLE = 10;
+
+    public static final double STOP_DISTANCE = 10;
 
     //ARM
     public static final int ARM_ID = 0;
@@ -54,4 +66,5 @@ public class Constants {
     public static final int LEVEL_DOWN = 0;
     public static final int HEAD_OUTTAKE = 0;
     public static final int HEAD_INTAKE = 0;
+    public static final int AUTO_CORRECT = 0;
 }

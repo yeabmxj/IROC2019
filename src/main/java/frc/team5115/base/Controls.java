@@ -25,4 +25,6 @@ public class Controls {
 
     public boolean headOuttake() { return joy.getRawButton(HEAD_OUTTAKE); }
     public boolean headIntake() { return joy.getRawButton(HEAD_INTAKE); }
+
+    public boolean autoCorrect() { return joy.getRawButton(AUTO_CORRECT); }
 }
