@@ -129,8 +129,8 @@ public class DriveSystem {
                 break;
             case AUTO_DRIVE:
                 do {
-                    simpleAuto.drive(AUTO_SPEED);
-                } while (!simpleAuto.isFinished() && limelight.getDistance() > STOP_DISTANCE && joy.autoCorrect());
+                    visionAuto.drive(AUTO_SPEED);
+                } while (!visionAuto.isFinished() && limelight.getDistance() > STOP_DISTANCE && joy.autoCorrect());
                 break;
         }
     }

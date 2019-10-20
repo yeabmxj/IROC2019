@@ -7,10 +7,10 @@ public class PID {
 
     private boolean finished = false;
 
-    private Heartbeat timer;
+    private Time timer;
 
     public PID(double P, double I, double D) {
-        timer = new Heartbeat();
+        timer = new Time();
         timer.start();
         this.P = P;
         this.I = I;

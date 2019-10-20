@@ -2,7 +2,8 @@ package frc.team5115.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 
-import frc.team5115.auto.SimpleAuto;
+import frc.team5115.auto.NavxAuto;
+import frc.team5115.auto.VisionAuto;
 import frc.team5115.base.Controls;
 import frc.team5115.external.Limelight;
 import frc.team5115.external.NavxWrapper;
@@ -16,7 +17,8 @@ import static frc.team5115.base.Constants.*;
 public class Robot extends TimedRobot {
     public static Controls joy;
 
-    public static SimpleAuto simpleAuto;
+    public static VisionAuto visionAuto;
+    public static NavxAuto navxAuto;
 
     public static ArmSystem as;
     public static DriveSystem ds;
@@ -34,7 +36,8 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         joy = new Controls(JOY_PORT);
 
-        simpleAuto = new SimpleAuto();
+        visionAuto = new VisionAuto();
+        navxAuto = new NavxAuto();
 
         as = new ArmSystem(ARM_ID, ARM_UPPER_ID, ARM_LOWER_ID);
         ds = new DriveSystem(FRONT_LEFT_TALON_ID, FRONT_RIGHT_TALON_ID, BACK_LEFT_TALON_ID, BACK_RIGHT_TALON_ID);

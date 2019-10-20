@@ -5,10 +5,10 @@ import frc.team5115.base.PID;
 import static frc.team5115.base.Constants.*;
 import static frc.team5115.robot.Robot.*;
 
-public class SimpleAuto {
+public class VisionAuto {
     private PID turn;
 
-    public SimpleAuto() {
+    public VisionAuto() {
         turn = new PID(1,0,0);
     }
 

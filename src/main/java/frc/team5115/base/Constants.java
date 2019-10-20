@@ -10,6 +10,8 @@ public class Constants {
     public static final double AUTO_TOLERANCE = 10;
     public static final double AUTO_SPEED = .5;
 
+    public static final double[] ANGLE = {-90,-45,0,45,90};
+
     //NAVX
     public static final int SAMPLE_SIZE = 100;
 
