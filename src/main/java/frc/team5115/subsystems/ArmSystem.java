@@ -36,7 +36,9 @@ public class ArmSystem extends StateMachine {
                 break;
             case LEVEL_UP:
                 level = Calculations.getClosestValue(armGyro.getPitch(),LEVEL);
-                if (level + 1 > 3) move(0,0);
+                if (level + 1 > 3){
+                    move(0,0);
+                }
                 else {
                     do {
                         move(ARM_DIRECTION, armPID.PID(LEVEL[level + 1], armGyro.getPitch(), ARM_TOLERANCE));
@@ -45,7 +47,9 @@ public class ArmSystem extends StateMachine {
                 break;
             case LEVEL_DOWN:
                 level = Calculations.getClosestValue(armGyro.getPitch(),LEVEL);
-                if (level - 1 < 0) move(0,0);
+                if (level - 1 < 0){
+                    move(0,0);
+                }
                 else {
                     do {
                         move(-ARM_DIRECTION, armPID.PID(LEVEL[level - 1], armGyro.getPitch(), ARM_TOLERANCE));
