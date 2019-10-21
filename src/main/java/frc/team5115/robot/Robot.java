@@ -1,5 +1,6 @@
 package frc.team5115.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 
 import frc.team5115.auto.NavxAuto;
@@ -61,12 +62,14 @@ public class Robot extends TimedRobot {
     }
 
     public void robotPeriodic() {
-        armGyro.update();
-        driveGyro.update();
+        if(DriverStation.getInstance().isEnabled()){
+            armGyro.update();
+            driveGyro.update();
 
-        asm.update();
-        dsm.update();
-        hsm.update();
+            asm.update();
+            dsm.update();
+            hsm.update();
+        }
     }
 }
 
