@@ -10,7 +10,7 @@ public class HeadStateMachine extends StateMachine {
     }
 
     public void update() {
-        setState(joy.headIntake() ? FORWARD : joy.headOuttake() ? REVERSE : OFF);
+        setState(joy.actuateHead() ? ON : OFF);
         hs.update();
     }
 }

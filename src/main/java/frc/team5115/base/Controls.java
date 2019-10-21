@@ -23,8 +23,7 @@ public class Controls {
     public boolean levelUp() { return joy.getRawButton(LEVEL_UP); }
     public boolean levelDown() { return joy.getRawButton(LEVEL_DOWN); }
 
-    public boolean headOuttake() { return joy.getRawButton(HEAD_OUTTAKE); }
-    public boolean headIntake() { return joy.getRawButton(HEAD_INTAKE); }
+    public boolean actuateHead() { return joy.getRawButton(ACTUATE_HEAD); }
 
     public boolean autoCorrect() { return joy.getRawButton(AUTO_CORRECT); }
 }

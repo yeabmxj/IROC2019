@@ -66,7 +66,6 @@ public class Constants {
     public static final int ARM_DOWN = 0;
     public static final int LEVEL_UP = 0;
     public static final int LEVEL_DOWN = 0;
-    public static final int HEAD_OUTTAKE = 0;
-    public static final int HEAD_INTAKE = 0;
+    public static final int ACTUATE_HEAD = 0;
     public static final int AUTO_CORRECT = 0;
 }
