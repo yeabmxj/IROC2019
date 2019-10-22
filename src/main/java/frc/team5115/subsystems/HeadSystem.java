@@ -8,16 +8,16 @@ import static frc.team5115.robot.Robot.*;
 
 public class HeadSystem {
     private VictorWrapper head;
-    private DigitalInput ballCheck;
+    private DigitalInput headContactSwitch;
 
-    public HeadSystem(int headID, int ballCheckID) {
+    public HeadSystem(int headID, int contactSwitchID) {
         head = new VictorWrapper(headID);
-        ballCheck = new DigitalInput(ballCheckID);
+        headContactSwitch = new DigitalInput(contactSwitchID);
     }
 
     private void actuate(int direction, double speed) { head.set(direction * speed); }
 
-    private boolean getHit() { return ballCheck.get(); }
+    private boolean getHit() { return headContactSwitch.get(); }
 
     public void update() {
         switch(hsm.getState()) {

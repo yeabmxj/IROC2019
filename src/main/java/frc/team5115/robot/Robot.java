@@ -42,7 +42,7 @@ public class Robot extends TimedRobot {
 
         as = new ArmSystem(ARM_ID, ARM_UPPER_ID, ARM_LOWER_ID);
         ds = new DriveSystem(FRONT_LEFT_TALON_ID, FRONT_RIGHT_TALON_ID, BACK_LEFT_TALON_ID, BACK_RIGHT_TALON_ID);
-        hs = new HeadSystem(HEAD_ID);
+        hs = new HeadSystem(HEAD_ID, CONTACT_SWITCH_ID);
 
         asm = new ArmStateMachine();
         dsm = new DriveStateMachine();

@@ -37,6 +37,7 @@ public class Constants {
 
     //HEAD
     public static final int HEAD_ID = 0;
+    public static final int CONTACT_SWITCH_ID = 1;
 
     public static final double HEAD_SPEED = 0;
 

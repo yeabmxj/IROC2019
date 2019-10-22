@@ -10,15 +10,13 @@ public class NavxAuto {
 
     private PID turn;
 
-    private int id = 0;
-
     public NavxAuto() {
         turn = new PID(1,0,0);
     }
 
     public void drive(double forward) {
         ds.tankDrive(
-                turn.PID(Calculations.getClosestValue(driveGyro.getYaw(), ANGLE),driveGyro.getYaw(), AUTO_TOLERANCE),
+                turn.PID(Calculations.getClosestValue(driveGyro.getYaw(), ANGLE), driveGyro.getYaw(), AUTO_TOLERANCE),
                 forward,
                 AUTO_THROTTLE);
     }

@@ -13,7 +13,10 @@ public class VisionAuto {
     }
 
     public void drive(double forward) {
-        ds.tankDrive(turn.PID(0,limelight.getEntry("tx"), AUTO_TOLERANCE),forward, AUTO_THROTTLE);
+        ds.tankDrive(
+                turn.PID(0,limelight.getEntry("tx"), AUTO_TOLERANCE),
+                forward,
+                AUTO_THROTTLE);
     }
 
     public boolean isFinished() {
