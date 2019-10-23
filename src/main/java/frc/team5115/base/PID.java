@@ -30,6 +30,7 @@ public class PID {
     }
 
     public void reset(){
+        timer.start();
         previousError = 0;
         integral = 0;
         finished = false;

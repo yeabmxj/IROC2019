@@ -23,9 +23,9 @@ public class Constants {
     public static final double STOP_DISTANCE = 10;
 
     //ARM
-    public static final int ARM_ID = 0;
-    public static final int ARM_UPPER_ID = 0;
-    public static final int ARM_LOWER_ID = 0;
+    public static final int ARM_ID = 2;
+    public static final int ARM_UPPER_ID = 8;
+    public static final int ARM_LOWER_ID = 7;
 
     public static final double ARM_SPEED = 0;
 
@@ -33,21 +33,21 @@ public class Constants {
     public static final double QUICK_STOP_ALPHA = 0.1;
 
     public static final double ARM_TOLERANCE = 1;
-    public static final double[] LEVEL = {10,20,30,40};
+    public static final double[] LEVEL = {38,45,80,126};
 
     //HEAD
-    public static final int HEAD_ID = 0;
+    public static final int HEAD_ID = 1;
     public static final int CONTACT_SWITCH_ID = 1;
 
     public static final double HEAD_SPEED = 0;
 
     //DRIVE TRAIN
-    public static final int FRONT_LEFT_TALON_ID = 0;
-    public static final int FRONT_RIGHT_TALON_ID = 0;
-    public static final int BACK_LEFT_TALON_ID = 0;
-    public static final int BACK_RIGHT_TALON_ID = 0;
+    public static final int FRONT_LEFT_TALON_ID = 1;
+    public static final int FRONT_RIGHT_TALON_ID = 2;
+    public static final int BACK_LEFT_TALON_ID = 3;
+    public static final int BACK_RIGHT_TALON_ID = 4;
 
-    public static final double INITIAL_THROTTLE = 0;
+    public static final double INITIAL_THROTTLE = .5;
 
     public static final int X_ACCELERATION_DIRECTION = 1;
     public static final double X_SAFE_ACCELERATION = 10;

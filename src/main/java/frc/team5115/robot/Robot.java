@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import frc.team5115.auto.NavxAuto;
 import frc.team5115.auto.VisionAuto;
 import frc.team5115.base.Controls;
+import frc.team5115.base.PID;
 import frc.team5115.external.Limelight;
 import frc.team5115.external.NavxWrapper;
 import frc.team5115.statemachines.ArmStateMachine;
@@ -34,6 +35,8 @@ public class Robot extends TimedRobot {
 
     public static Limelight limelight;
 
+    public static PID loop;
+
     public void robotInit() {
         joy = new Controls(JOY_PORT);
 
@@ -59,6 +62,12 @@ public class Robot extends TimedRobot {
         asm.init();
         dsm.init();
         hsm.init();
+
+        loop = new PID(.02, .01, 0);
+    }
+
+    public void teleopInit() {
+        loop.reset();
     }
 
     public void robotPeriodic() {

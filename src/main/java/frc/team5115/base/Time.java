@@ -10,5 +10,5 @@ public class Time {
         difference = Timer.getFPGATimestamp() * 1000 - checkpoint;
         checkpoint = Timer.getFPGATimestamp() * 1000;
     }
-    public double getDifference() { return difference; }
+    public double getDifference() { return difference / 1000; }
 }

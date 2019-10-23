@@ -1,7 +1,6 @@
 package frc.team5115.subsystems;
 
 import frc.team5115.base.Calculations;
-import frc.team5115.base.PID;
 import frc.team5115.base.StateMachine;
 import frc.team5115.external.VictorWrapper;
 
@@ -10,15 +9,12 @@ import static frc.team5115.robot.Robot.*;
 
 public class ArmSystem extends StateMachine {
     private VictorWrapper arm;
-    private PID armPID;
 
     private int level = 0;
 
     public ArmSystem(int armID, int upperID, int lowerID) {
         arm = new VictorWrapper(armID,upperID,lowerID);
         arm.setInverted(true);
-
-        armPID = new PID(1, 0, 0);
     }
 
     private void move(int direction, double speed) { arm.set(direction * speed); } // 0 1 2 3
@@ -41,8 +37,8 @@ public class ArmSystem extends StateMachine {
                 }
                 else {
                     do {
-                        move(ARM_DIRECTION, armPID.PID(LEVEL[level + 1], armGyro.getPitch(), ARM_TOLERANCE));
-                    } while (!armPID.isFinished() && asm.getState() == LEVEL_UP);
+                        move(ARM_DIRECTION, loop.PID(LEVEL[level + 1], armGyro.getPitch(), ARM_TOLERANCE));
+                    } while (!loop.isFinished() && asm.getState() == LEVEL_UP);
                 }
                 break;
             case LEVEL_DOWN:
@@ -52,8 +48,8 @@ public class ArmSystem extends StateMachine {
                 }
                 else {
                     do {
-                        move(-ARM_DIRECTION, armPID.PID(LEVEL[level - 1], armGyro.getPitch(), ARM_TOLERANCE));
-                    } while (!armPID.isFinished() && asm.getState() == LEVEL_DOWN);
+                        move(-ARM_DIRECTION, loop.PID(LEVEL[level - 1], armGyro.getPitch(), ARM_TOLERANCE));
+                    } while (!loop.isFinished() && asm.getState() == LEVEL_DOWN);
                 }
                 break;
         }
