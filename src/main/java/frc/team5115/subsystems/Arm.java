@@ -24,7 +24,7 @@ public class Arm {
     public void moveArm(){
         if (joy.getRawButton(6)) {
             if (upper.get()) {
-                arm.set(ControlMode.PercentOutput, .5);
+                arm.set(ControlMode.PercentOutput, .6);
             }
             else {
                 armStop();
@@ -33,7 +33,7 @@ public class Arm {
         else if (joy.getRawButton(5))
         {
             if (lower.get()) {
-                arm.set(ControlMode.PercentOutput, -.4);
+                arm.set(ControlMode.PercentOutput, -.5);
             }
             else {
                 armStop();
